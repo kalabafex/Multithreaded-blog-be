@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 public class Blog {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Change from 'long' to 'Long' to support nullability before assignment
+    private Long id;
 
     @Column(nullable = false)
     private String title;
@@ -22,7 +21,8 @@ public class Blog {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    public Blog(String title, String content) {
+    public Blog(Long id, String title, String content) {
+        this.id = id;
         this.title = title;
         this.content = content;
     }
