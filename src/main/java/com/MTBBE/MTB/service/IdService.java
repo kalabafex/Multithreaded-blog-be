@@ -1,17 +1,16 @@
 package com.MTBBE.MTB.service;
 import com.MTBBE.MTB.model.IdSequence;
 import com.MTBBE.MTB.repository.IdSequenceRepository;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
-import java.util.concurrent.locks.ReentrantLock;
 import org.springframework.beans.factory.annotation.Autowired;
-
-@Component
-public class IdGenerator {
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+@Service
+public class IdService {
 
     @Autowired
     private IdSequenceRepository idSequenceRepository;
 
+    @Transactional
     public Long generateId() {
         IdSequence idSequence = idSequenceRepository.findByNameForUpdate("blog_id");
         if (idSequence == null) {
@@ -27,5 +26,4 @@ public class IdGenerator {
         return newId;
     }
 }
-
 

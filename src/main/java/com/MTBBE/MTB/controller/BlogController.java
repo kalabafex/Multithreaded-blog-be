@@ -19,7 +19,10 @@ public class BlogController {
     public CompletableFuture<ResponseEntity<Blog>> createBlog(@RequestBody Blog blogRequest) {
         return blogService.createBlog(blogRequest.getTitle(), blogRequest.getContent())
                 .thenApply(ResponseEntity::ok)
-                .exceptionally(ex -> ResponseEntity.badRequest().build());
+                .exceptionally(ex -> {
+                    ex.printStackTrace(); // Log the exception for debugging
+                    return ResponseEntity.badRequest().build();
+                });
     }
 
     @PutMapping("/{id}")
